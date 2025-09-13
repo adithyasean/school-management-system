@@ -1,5 +1,38 @@
 -- School Management System Schema Mapping
 
+-- Schools table
+CREATE TABLE schools (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address TEXT NOT NULL,
+    phone VARCHAR(20),
+    email VARCHAR(100),
+    principal_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Subjects table
+CREATE TABLE subjects (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(10) UNIQUE NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Classes table
+CREATE TABLE classes (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    grade VARCHAR(10) NOT NULL,
+    section VARCHAR(5) NOT NULL,
+    teacher_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Users table - Base table for all user types
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -20,10 +53,10 @@ CREATE TABLE users (
 
 -- Students table
 CREATE TABLE students (
-    student_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    grade VARCHAR(10) NOT NULL,
-    section VARCHAR(5) NOT NULL,
+    student_id VARCHAR(20) UNIQUE NOT NULL,
+    class_id INTEGER REFERENCES classes(id),
     enrollment_date DATE NOT NULL,
     parent_name VARCHAR(100) NOT NULL,
     parent_contact VARCHAR(20) NOT NULL,
@@ -34,10 +67,10 @@ CREATE TABLE students (
 
 -- Teachers table
 CREATE TABLE teachers (
-    teacher_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    teacher_id VARCHAR(20) UNIQUE NOT NULL,
     department VARCHAR(50) NOT NULL,
-    subjects TEXT[], -- Array of subjects
     joining_date DATE NOT NULL,
     qualification TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -46,8 +79,9 @@ CREATE TABLE teachers (
 
 -- Section Heads table
 CREATE TABLE section_heads (
-    section_id SERIAL PRIMARY KEY,
-    teacher_id INTEGER REFERENCES teachers(teacher_id) ON DELETE CASCADE,
+    id SERIAL PRIMARY KEY,
+    teacher_id INTEGER REFERENCES teachers(id) ON DELETE CASCADE,
+    section_id VARCHAR(20) NOT NULL,
     department VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -55,8 +89,9 @@ CREATE TABLE section_heads (
 
 -- Principals table
 CREATE TABLE principals (
-    school_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    school_id INTEGER REFERENCES schools(id),
     appointment_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -71,6 +106,24 @@ CREATE TABLE admins (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Teacher-Subject relationship table
+CREATE TABLE teacher_subjects (
+    id SERIAL PRIMARY KEY,
+    teacher_id INTEGER REFERENCES teachers(id) ON DELETE CASCADE,
+    subject_id INTEGER REFERENCES subjects(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(teacher_id, subject_id)
+);
+
+-- Student-Subject relationship table
+CREATE TABLE student_subjects (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+    subject_id INTEGER REFERENCES subjects(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(student_id, subject_id)
+);
+
 -- Assessments table
 CREATE TABLE assessments (
     id SERIAL PRIMARY KEY,
@@ -78,9 +131,9 @@ CREATE TABLE assessments (
     description TEXT,
     due_date TIMESTAMP NOT NULL,
     total_marks INTEGER NOT NULL,
-    subject VARCHAR(50) NOT NULL,
-    assigned_to INTEGER REFERENCES students(student_id),
-    created_by INTEGER REFERENCES teachers(teacher_id),
+    subject_id INTEGER REFERENCES subjects(id),
+    assigned_to INTEGER REFERENCES students(id),
+    created_by INTEGER REFERENCES teachers(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -89,11 +142,18 @@ CREATE TABLE assessments (
 CREATE TABLE exams (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    subject VARCHAR(50) NOT NULL,
+    exam_type VARCHAR(50) NOT NULL,
+    year INTEGER NOT NULL,
+    term VARCHAR(20) NOT NULL,
+    subject_id INTEGER REFERENCES subjects(id),
+    class_id INTEGER REFERENCES classes(id),
     date DATE NOT NULL,
     duration INTEGER NOT NULL, -- Duration in minutes
     total_marks INTEGER NOT NULL,
-    created_by INTEGER REFERENCES teachers(teacher_id),
+    pass_marks INTEGER NOT NULL,
+    average_marks DECIMAL(5,2),
+    status VARCHAR(20) DEFAULT 'scheduled',
+    created_by INTEGER REFERENCES teachers(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -102,7 +162,7 @@ CREATE TABLE exams (
 CREATE TABLE exam_results (
     id SERIAL PRIMARY KEY,
     exam_id INTEGER REFERENCES exams(id) ON DELETE CASCADE,
-    student_id INTEGER REFERENCES students(student_id) ON DELETE CASCADE,
+    student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
     marks DECIMAL(5,2) NOT NULL,
     grade VARCHAR(2),
     remarks TEXT,
@@ -114,9 +174,7 @@ CREATE TABLE exam_results (
 -- Timetable table
 CREATE TABLE timetables (
     id SERIAL PRIMARY KEY,
-    grade VARCHAR(10) NOT NULL,
-    section VARCHAR(5) NOT NULL,
-    schedule JSONB NOT NULL, -- Storing schedule as JSON for flexibility
+    class_id INTEGER REFERENCES classes(id),
     valid_from DATE NOT NULL,
     valid_to DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -126,12 +184,25 @@ CREATE TABLE timetables (
 -- Sessions table
 CREATE TABLE sessions (
     id SERIAL PRIMARY KEY,
-    subject VARCHAR(50) NOT NULL,
-    teacher_id INTEGER REFERENCES teachers(teacher_id),
+    timetable_id INTEGER REFERENCES timetables(id) ON DELETE CASCADE,
+    subject_id INTEGER REFERENCES subjects(id),
+    teacher_id INTEGER REFERENCES teachers(id),
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    day VARCHAR(10) NOT NULL,
-    timetable_id INTEGER REFERENCES timetables(id) ON DELETE CASCADE,
+    day_of_week VARCHAR(10) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Attendance table
+CREATE TABLE attendance (
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
+    session_id INTEGER REFERENCES sessions(id),
+    date DATE NOT NULL,
+    status VARCHAR(10) NOT NULL, -- present, absent, late
+    remarks TEXT,
+    marked_by INTEGER REFERENCES teachers(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -149,7 +220,8 @@ CREATE TABLE reports (
 
 -- Student Records table
 CREATE TABLE student_records (
-    student_id INTEGER PRIMARY KEY REFERENCES students(student_id),
+    id SERIAL PRIMARY KEY,
+    student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
     current_grade VARCHAR(10) NOT NULL,
     academic_year VARCHAR(9) NOT NULL,
     subjects JSONB NOT NULL, -- Storing subjects and their details as JSON
@@ -168,11 +240,22 @@ CREATE TABLE logs (
     details JSONB NOT NULL
 );
 
+-- Add foreign key constraints
+ALTER TABLE schools ADD CONSTRAINT fk_schools_principal FOREIGN KEY (principal_id) REFERENCES principals(id);
+ALTER TABLE classes ADD CONSTRAINT fk_classes_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id);
+
 -- Indexes for better query performance
+CREATE INDEX idx_users_school_id ON users(school_id);
 CREATE INDEX idx_students_user_id ON students(user_id);
+CREATE INDEX idx_students_class_id ON students(class_id);
 CREATE INDEX idx_teachers_user_id ON teachers(user_id);
 CREATE INDEX idx_exam_results_student_id ON exam_results(student_id);
 CREATE INDEX idx_exam_results_exam_id ON exam_results(exam_id);
 CREATE INDEX idx_sessions_teacher_id ON sessions(teacher_id);
+CREATE INDEX idx_sessions_timetable_id ON sessions(timetable_id);
+CREATE INDEX idx_attendance_student_id ON attendance(student_id);
+CREATE INDEX idx_attendance_date ON attendance(date);
 CREATE INDEX idx_logs_user_id ON logs(user_id);
 CREATE INDEX idx_assessments_assigned_to ON assessments(assigned_to);
+CREATE INDEX idx_teacher_subjects_teacher_id ON teacher_subjects(teacher_id);
+CREATE INDEX idx_student_subjects_student_id ON student_subjects(student_id);

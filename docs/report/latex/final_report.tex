@@ -274,6 +274,448 @@ The design follows best practices such as separation of concerns, robust error h
     \label{fig:use-case-diagram}
 \end{figure}
 
+\section{Database Design}
+\subsection{Database Table Designs}
+This section provides comprehensive table designs for the School Management System database. The schema follows a hierarchical user structure with role-based access control and supports comprehensive academic management functionality.
+
+\subsubsection{Core Tables}
+
+\paragraph{Schools Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Schools Table Schema}
+\label{tab:schools}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Schools Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier for each school \\
+\hline
+name & VARCHAR(100) & NOT NULL & Official name of the school \\
+\hline
+address & TEXT & NOT NULL & Complete address of the school \\
+\hline
+phone & VARCHAR(20) & & Contact phone number \\
+\hline
+email & VARCHAR(100) & & Official email address \\
+\hline
+principal\_id & INTEGER & FK to principals(id) & Reference to current principal \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Users Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Users Table Schema}
+\label{tab:users}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Users Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier for each user \\
+\hline
+school\_id & INTEGER & FK to schools(id) & Reference to associated school \\
+\hline
+username & VARCHAR(50) & UNIQUE, NOT NULL & System login username \\
+\hline
+password & VARCHAR(255) & NOT NULL & Encrypted password hash \\
+\hline
+first\_name & VARCHAR(50) & NOT NULL & User's first name \\
+\hline
+last\_name & VARCHAR(50) & NOT NULL & User's last name \\
+\hline
+email & VARCHAR(100) & UNIQUE, NOT NULL & Email address \\
+\hline
+phone & VARCHAR(20) & & Contact phone number \\
+\hline
+address & TEXT & & Residential address \\
+\hline
+last\_login & TIMESTAMP & & Last login timestamp \\
+\hline
+is\_active & BOOLEAN & DEFAULT true & Account activation status \\
+\hline
+fingerprint & VARCHAR(255) & & Biometric fingerprint data \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{Academic Structure Tables}
+
+\paragraph{Subjects Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Subjects Table Schema}
+\label{tab:subjects}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Subjects Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier for each subject \\
+\hline
+name & VARCHAR(100) & NOT NULL & Subject name \\
+\hline
+code & VARCHAR(10) & UNIQUE, NOT NULL & Subject code (e.g., MATH101) \\
+\hline
+description & TEXT & & Detailed subject description \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Classes Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Classes Table Schema}
+\label{tab:classes}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Classes Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier for each class \\
+\hline
+name & VARCHAR(50) & NOT NULL & Class name \\
+\hline
+grade & VARCHAR(10) & NOT NULL & Grade level (e.g., 10, 11, 12) \\
+\hline
+section & VARCHAR(5) & NOT NULL & Section identifier (A, B, C, etc.) \\
+\hline
+teacher\_id & INTEGER & FK to teachers(id) & Class teacher reference \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{User Role Tables}
+
+\paragraph{Students Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Students Table Schema}
+\label{tab:students}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Students Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+user\_id & INTEGER & FK to users(id) & Reference to user account \\
+\hline
+student\_id & VARCHAR(20) & UNIQUE, NOT NULL & Student ID number \\
+\hline
+class\_id & INTEGER & FK to classes(id) & Current class assignment \\
+\hline
+enrollment\_date & DATE & NOT NULL & Date of enrollment \\
+\hline
+parent\_name & VARCHAR(100) & NOT NULL & Parent/guardian name \\
+\hline
+parent\_contact & VARCHAR(20) & NOT NULL & Parent/guardian contact \\
+\hline
+gpa & DECIMAL(3,2) & & Current GPA \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Teachers Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+user\_id & INTEGER & FK to users(id) & Reference to user account \\
+\hline
+teacher\_id & VARCHAR(20) & UNIQUE, NOT NULL & Teacher ID number \\
+\hline
+department & VARCHAR(50) & NOT NULL & Department/subject area \\
+\hline
+joining\_date & DATE & NOT NULL & Date of joining \\
+\hline
+qualification & TEXT & NOT NULL & Educational qualifications \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Section Heads Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+teacher\_id & INTEGER & FK to teachers(id) & Reference to teacher account \\
+\hline
+section\_id & VARCHAR(20) & NOT NULL & Section identifier \\
+\hline
+department & VARCHAR(50) & NOT NULL & Department managed \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Principals Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+user\_id & INTEGER & FK to users(id) & Reference to user account \\
+\hline
+school\_id & INTEGER & FK to schools(id) & Reference to managed school \\
+\hline
+appointment\_date & DATE & NOT NULL & Date of appointment \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Admins Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+user\_id & INTEGER & FK to users(id) & Reference to user account \\
+\hline
+access\_level & VARCHAR(20) & NOT NULL & Administrative access level \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{Academic Management Tables}
+
+\paragraph{Assessments Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+title & VARCHAR(100) & NOT NULL & Assessment title \\
+\hline
+description & TEXT & & Detailed description \\
+\hline
+due\_date & TIMESTAMP & NOT NULL & Submission deadline \\
+\hline
+total\_marks & INTEGER & NOT NULL & Maximum marks \\
+\hline
+subject\_id & INTEGER & FK to subjects(id) & Related subject \\
+\hline
+assigned\_to & INTEGER & FK to students(id) & Assigned student \\
+\hline
+created\_by & INTEGER & FK to teachers(id) & Creating teacher \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Exams Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+name & VARCHAR(100) & NOT NULL & Exam name \\
+\hline
+exam\_type & VARCHAR(50) & NOT NULL & Type of exam (midterm, final, etc.) \\
+\hline
+year & INTEGER & NOT NULL & Academic year \\
+\hline
+term & VARCHAR(20) & NOT NULL & Academic term \\
+\hline
+subject\_id & INTEGER & FK to subjects(id) & Related subject \\
+\hline
+class\_id & INTEGER & FK to classes(id) & Target class \\
+\hline
+date & DATE & NOT NULL & Exam date \\
+\hline
+duration & INTEGER & NOT NULL & Duration in minutes \\
+\hline
+total\_marks & INTEGER & NOT NULL & Maximum marks \\
+\hline
+pass\_marks & INTEGER & NOT NULL & Passing marks \\
+\hline
+average\_marks & DECIMAL(5,2) & & Calculated average \\
+\hline
+status & VARCHAR(20) & DEFAULT 'scheduled' & Exam status \\
+\hline
+created\_by & INTEGER & FK to teachers(id) & Creating teacher \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Exam Results Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+exam\_id & INTEGER & FK to exams(id) & Related exam \\
+\hline
+student\_id & INTEGER & FK to students(id) & Student who took exam \\
+\hline
+marks & DECIMAL(5,2) & NOT NULL & Marks obtained \\
+\hline
+grade & VARCHAR(2) & & Letter grade (A, B, C, etc.) \\
+\hline
+remarks & TEXT & & Additional remarks \\
+\hline
+date & DATE & NOT NULL & Result date \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{Scheduling and Attendance Tables}
+
+\paragraph{Timetables Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+class\_id & INTEGER & FK to classes(id) & Associated class \\
+\hline
+valid\_from & DATE & NOT NULL & Start date of validity \\
+\hline
+valid\_to & DATE & NOT NULL & End date of validity \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Sessions Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+timetable\_id & INTEGER & FK to timetables(id) & Parent timetable \\
+\hline
+subject\_id & INTEGER & FK to subjects(id) & Subject being taught \\
+\hline
+teacher\_id & INTEGER & FK to teachers(id) & Teaching staff member \\
+\hline
+start\_time & TIME & NOT NULL & Session start time \\
+\hline
+end\_time & TIME & NOT NULL & Session end time \\
+\hline
+day\_of\_week & VARCHAR(10) & NOT NULL & Day of the week \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Attendance Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+student\_id & INTEGER & FK to students(id) & Student reference \\
+\hline
+session\_id & INTEGER & FK to sessions(id) & Related session \\
+\hline
+date & DATE & NOT NULL & Attendance date \\
+\hline
+status & VARCHAR(10) & NOT NULL & Attendance status (present/absent/late) \\
+\hline
+remarks & TEXT & & Additional notes \\
+\hline
+marked\_by & INTEGER & FK to teachers(id) & Teacher who marked attendance \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{Database Relationships and Constraints}
+The database maintains referential integrity through the following key relationships:
+\begin{itemize}
+    \item Users are associated with schools through \texttt{school\_id}
+    \item Students, Teachers, Principals, and Admins inherit from Users
+    \item Section Heads are promoted Teachers
+    \item Classes have assigned Teachers and contain Students
+    \item Subjects are taught by Teachers and studied by Students
+    \item Assessments and Exams are created by Teachers for specific Subjects
+    \item Timetables organize Sessions for Classes
+    \item Attendance tracks Students' presence in Sessions
+\end{itemize}
+
+Performance optimization is achieved through strategic indexing on frequently queried columns such as foreign keys, dates, and user identifiers.
+
 \chapter{User Interface Design}
 \section{Login Page}
 \begin{figure}[htbp]
