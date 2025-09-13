@@ -507,24 +507,6 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \hline
 \end{longtable}
 
-\subsection{Logs Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
-\hline
-\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
-\hline
-\endhead
-id & SERIAL & PRIMARY KEY & Unique identifier \\
-\hline
-action & VARCHAR(50) & NOT NULL & Action performed \\
-\hline
-timestamp & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Action timestamp \\
-\hline
-user\_id & INTEGER & FK to users(id) & User who performed action \\
-\hline
-details & JSONB & NOT NULL & Action details in JSON format \\
-\hline
-\end{longtable}
-
 \section{Database Indexes}
 
 The following indexes are created for optimal query performance:
@@ -540,7 +522,6 @@ The following indexes are created for optimal query performance:
     \item \texttt{idx\_sessions\_timetable\_id} on sessions(timetable\_id)
     \item \texttt{idx\_attendance\_student\_id} on attendance(student\_id)
     \item \texttt{idx\_attendance\_date} on attendance(date)
-    \item \texttt{idx\_logs\_user\_id} on logs(user\_id)
     \item \texttt{idx\_assessments\_assigned\_to} on assessments(assigned\_to)
     \item \texttt{idx\_teacher\_subjects\_teacher\_id} on teacher\_subjects(teacher\_id)
     \item \texttt{idx\_student\_subjects\_student\_id} on student\_subjects(student\_id)

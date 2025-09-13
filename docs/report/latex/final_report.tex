@@ -451,6 +451,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Teachers Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Teachers Table Schema}
+\label{tab:teachers}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Teachers Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -475,6 +482,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Section Heads Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Section Heads Table Schema}
+\label{tab:section-heads}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Section Heads Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -495,6 +509,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Principals Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Principals Table Schema}
+\label{tab:principals}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Principals Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -515,6 +536,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Admins Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Admins Table Schema}
+\label{tab:admins}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Admins Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -531,10 +559,65 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \hline
 \end{longtable}
 
+\subsubsection{Relationship Tables}
+
+\paragraph{Teacher-Subject Relationship Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Teacher-Subject Relationship Table Schema}
+\label{tab:teacher-subjects}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Teacher-Subject Relationship Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+teacher\_id & INTEGER & FK to teachers(id) & Teacher reference \\
+\hline
+subject\_id & INTEGER & FK to subjects(id) & Subject reference \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Student-Subject Relationship Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Student-Subject Relationship Table Schema}
+\label{tab:student-subjects}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Student-Subject Relationship Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+student\_id & INTEGER & FK to students(id) & Student reference \\
+\hline
+subject\_id & INTEGER & FK to subjects(id) & Subject reference \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+\end{longtable}
+
 \subsubsection{Academic Management Tables}
 
 \paragraph{Assessments Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Assessments Table Schema}
+\label{tab:assessments}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Assessments Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -563,6 +646,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Exams Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Exams Table Schema}
+\label{tab:exams}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Exams Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -603,6 +693,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Exam Results Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Exam Results Table Schema}
+\label{tab:exam-results}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Exam Results Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -631,6 +728,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Timetables Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Timetables Table Schema}
+\label{tab:timetables}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Timetables Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -651,6 +755,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Sessions Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Sessions Table Schema}
+\label{tab:sessions}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Sessions Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -677,6 +788,13 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 
 \paragraph{Attendance Table}
 \begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Attendance Table Schema}
+\label{tab:attendance}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Attendance Table Schema (continued)}\\
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -701,20 +819,118 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \hline
 \end{longtable}
 
-\subsubsection{Database Relationships and Constraints}
-The database maintains referential integrity through the following key relationships:
+\subsubsection{System Tables}
+
+\paragraph{Reports Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Reports Table Schema}
+\label{tab:reports}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Reports Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+type & VARCHAR(50) & NOT NULL & Report type \\
+\hline
+date & DATE & NOT NULL & Report generation date \\
+\hline
+generated\_by & INTEGER & FK to users(id) & User who generated report \\
+\hline
+content & TEXT & NOT NULL & Report content/data \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\paragraph{Student Records Table}
+\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\caption{Student Records Table Schema}
+\label{tab:student-records}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endfirsthead
+\caption[]{Student Records Table Schema (continued)}\\
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
+\hline
+\endhead
+id & SERIAL & PRIMARY KEY & Unique identifier \\
+\hline
+student\_id & INTEGER & FK to students(id) & Student reference \\
+\hline
+current\_grade & VARCHAR(10) & NOT NULL & Current grade level \\
+\hline
+academic\_year & VARCHAR(9) & NOT NULL & Academic year \\
+\hline
+subjects & JSONB & NOT NULL & Subject details in JSON format \\
+\hline
+attendance & JSONB & NOT NULL & Attendance records in JSON format \\
+\hline
+achievements & TEXT[] & & Array of achievements \\
+\hline
+created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp \\
+\hline
+updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
+\hline
+\end{longtable}
+
+\subsubsection{Database Indexes}
+
+The following indexes are created for optimal query performance:
+
 \begin{itemize}
-    \item Users are associated with schools through \texttt{school\_id}
-    \item Students, Teachers, Principals, and Admins inherit from Users
-    \item Section Heads are promoted Teachers
-    \item Classes have assigned Teachers and contain Students
-    \item Subjects are taught by Teachers and studied by Students
-    \item Assessments and Exams are created by Teachers for specific Subjects
-    \item Timetables organize Sessions for Classes
-    \item Attendance tracks Students' presence in Sessions
+    \item \texttt{idx\_users\_school\_id} on users(school\_id)
+    \item \texttt{idx\_students\_user\_id} on students(user\_id)
+    \item \texttt{idx\_students\_class\_id} on students(class\_id)
+    \item \texttt{idx\_teachers\_user\_id} on teachers(user\_id)
+    \item \texttt{idx\_exam\_results\_student\_id} on exam\_results(student\_id)
+    \item \texttt{idx\_exam\_results\_exam\_id} on exam\_results(exam\_id)
+    \item \texttt{idx\_sessions\_teacher\_id} on sessions(teacher\_id)
+    \item \texttt{idx\_sessions\_timetable\_id} on sessions(timetable\_id)
+    \item \texttt{idx\_attendance\_student\_id} on attendance(student\_id)
+    \item \texttt{idx\_attendance\_date} on attendance(date)
+    \item \texttt{idx\_assessments\_assigned\_to} on assessments(assigned\_to)
+    \item \texttt{idx\_teacher\_subjects\_teacher\_id} on teacher\_subjects(teacher\_id)
+    \item \texttt{idx\_student\_subjects\_student\_id} on student\_subjects(student\_id)
 \end{itemize}
 
-Performance optimization is achieved through strategic indexing on frequently queried columns such as foreign keys, dates, and user identifiers.
+\subsubsection{Database Relationships and Constraints}
+
+The database maintains referential integrity through comprehensive foreign key relationships and constraints. The system follows a hierarchical structure where all user types inherit from the base Users table, ensuring data consistency and enabling centralized user management.
+
+\paragraph{Key Relationships:}
+\begin{itemize}
+    \item Users are associated with schools through \texttt{school\_id} foreign key
+    \item Students, Teachers, Principals, and Admins extend the Users table through \texttt{user\_id} foreign key
+    \item Section Heads are specialized Teachers with additional responsibilities
+    \item Classes have assigned Teachers (class teacher) and contain multiple Students
+    \item Subjects are taught by Teachers and studied by Students through relationship tables
+    \item Assessments and Exams are created by Teachers for specific Subjects and Classes
+    \item Timetables organize Sessions for Classes with specific Teachers and Subjects
+    \item Attendance tracks Students' presence in specific Sessions
+    \item Reports can be generated by any User and track system activities
+    \item Logs maintain audit trails of all User actions in the system
+\end{itemize}
+
+\paragraph{Data Integrity Constraints:}
+\begin{itemize}
+    \item All foreign key constraints ensure referential integrity
+    \item Unique constraints on usernames, emails, and ID numbers prevent duplicates
+    \item Check constraints validate data ranges (e.g., GPA between 0.00-4.00)
+    \item NOT NULL constraints ensure required fields are always populated
+    \item Default values for timestamps enable automatic record tracking
+\end{itemize}
+
+Performance optimization is achieved through strategic indexing on frequently queried columns such as foreign keys, dates, and user identifiers. The JSONB data type in PostgreSQL allows for flexible storage of complex data structures while maintaining query performance.
 
 \chapter{User Interface Design}
 \section{Login Page}

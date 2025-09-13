@@ -231,15 +231,6 @@ CREATE TABLE student_records (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Logs table
-CREATE TABLE logs (
-    id SERIAL PRIMARY KEY,
-    action VARCHAR(50) NOT NULL,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    user_id INTEGER REFERENCES users(id),
-    details JSONB NOT NULL
-);
-
 -- Add foreign key constraints
 ALTER TABLE schools ADD CONSTRAINT fk_schools_principal FOREIGN KEY (principal_id) REFERENCES principals(id);
 ALTER TABLE classes ADD CONSTRAINT fk_classes_teacher FOREIGN KEY (teacher_id) REFERENCES teachers(id);
@@ -255,7 +246,6 @@ CREATE INDEX idx_sessions_teacher_id ON sessions(teacher_id);
 CREATE INDEX idx_sessions_timetable_id ON sessions(timetable_id);
 CREATE INDEX idx_attendance_student_id ON attendance(student_id);
 CREATE INDEX idx_attendance_date ON attendance(date);
-CREATE INDEX idx_logs_user_id ON logs(user_id);
 CREATE INDEX idx_assessments_assigned_to ON assessments(assigned_to);
 CREATE INDEX idx_teacher_subjects_teacher_id ON teacher_subjects(teacher_id);
 CREATE INDEX idx_student_subjects_student_id ON student_subjects(student_id);
