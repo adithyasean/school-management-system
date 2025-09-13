@@ -11,8 +11,11 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{ragged2e}
 
 \geometry{margin=1in}
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{School Management System}
@@ -36,7 +39,7 @@ This document provides comprehensive table designs for the School Management Sys
 \section{Core Tables}
 
 \subsection{Schools Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -60,7 +63,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Users Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -98,7 +101,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{Academic Structure Tables}
 
 \subsection{Subjects Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -118,7 +121,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Classes Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -142,7 +145,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{User Role Tables}
 
 \subsection{Students Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -170,7 +173,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Teachers Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -194,7 +197,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Section Heads Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -214,7 +217,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Principals Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -234,7 +237,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Admins Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -254,7 +257,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{Relationship Tables}
 
 \subsection{Teacher-Subject Relationship Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -270,7 +273,7 @@ created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp
 \end{longtable}
 
 \subsection{Student-Subject Relationship Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -288,7 +291,7 @@ created\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Record creation timestamp
 \section{Academic Management Tables}
 
 \subsection{Assessments Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -316,7 +319,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Exams Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -356,7 +359,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Exam Results Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -384,7 +387,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{Scheduling Tables}
 
 \subsection{Timetables Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -404,7 +407,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Sessions Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -432,7 +435,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{Attendance Management}
 
 \subsection{Attendance Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -460,7 +463,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \section{System Tables}
 
 \subsection{Reports Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
@@ -482,7 +485,7 @@ updated\_at & TIMESTAMP & DEFAULT CURRENT\_TIMESTAMP & Last update timestamp \\
 \end{longtable}
 
 \subsection{Student Records Table}
-\begin{longtable}{|p{3cm}|p{3cm}|p{2cm}|p{6cm}|}
+\begin{longtable}{|p{3.5cm}|p{2.5cm}|p{3cm}|p{5.5cm}|}
 \hline
 \textbf{Column Name} & \textbf{Data Type} & \textbf{Constraints} & \textbf{Description} \\
 \hline
