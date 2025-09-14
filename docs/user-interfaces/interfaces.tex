@@ -1,0 +1,313 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+
+% Set up page style
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{School Management System Interfaces}
+\lhead{User Interface Documentation}
+\cfoot{\thepage}
+
+% Fix header height warning
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\Huge\bfseries School Management System}\\[0.5cm]
+    {\Large User Interface Documentation}\\[1.5cm]
+    
+    {\large Complete Interface Gallery}\\[3cm]
+    
+    \vfill
+    
+    {\large \today}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This document presents a comprehensive gallery of all user interfaces designed for the School Management System. The interfaces are organized by user roles and functionality, providing a complete visual reference for the system's user experience design.
+
+\section{General Interface}
+
+\subsection{Login Page}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{login-page.png}
+    \caption{System Login Page}
+    \label{fig:login-page}
+\end{figure}
+
+\section{Administrator Interfaces}
+
+The administrator role has comprehensive access to system management, user administration, and reporting capabilities.
+
+\subsection{Administrator Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{admin/admin-dashboard-page.png}
+    \caption{Administrator Dashboard - Main overview page with system statistics and quick actions}
+    \label{fig:admin-dashboard}
+\end{figure}
+
+\subsection{Administrator Profile Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{admin/admin-profile-page.png}
+    \caption{Administrator Profile Page - Personal information and account settings}
+    \label{fig:admin-profile}
+\end{figure}
+
+\subsection{Administrator Reports}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{admin/admin-reports-page.png}
+    \caption{Administrator Reports Page - Comprehensive system reports and analytics}
+    \label{fig:admin-reports}
+\end{figure}
+
+\section{Principal Interfaces}
+
+The principal role focuses on school-wide oversight, announcements, and administrative functions.
+
+\subsection{Principal Login}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{principal/login-page.png}
+    \caption{Principal-specific Login Page}
+    \label{fig:principal-login}
+\end{figure}
+
+\subsection{Principal Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{principal/principal-dashboard-page.png}
+    \caption{Principal Dashboard - School overview and management tools}
+    \label{fig:principal-dashboard}
+\end{figure}
+
+\subsection{Principal Profile Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{principal/principal-profile-page.png}
+    \caption{Principal Profile Page - Personal details and administrative settings}
+    \label{fig:principal-profile}
+\end{figure}
+
+\subsection{Principal Reports}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{principal/principal-reports-page.png}
+    \caption{Principal Reports Page - School performance and administrative reports}
+    \label{fig:principal-reports}
+\end{figure}
+
+\section{Sectional Head Interfaces}
+
+The sectional head role manages departmental staff, schedules, and section-specific operations.
+
+\subsection{Sectional Head Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{sectional-head/sectionalhead-dashboard-page.png}
+    \caption{Sectional Head Dashboard - Department overview and management tools}
+    \label{fig:sectionalhead-dashboard}
+\end{figure}
+
+\subsection{Staff Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{sectional-head/sectionalhead-staff-management-page.png}
+    \caption{Staff Management Page - Teacher and staff administration interface}
+    \label{fig:sectionalhead-staff}
+\end{figure}
+
+\subsection{Time Table Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{sectional-head/sectionalhead-time-table-management-page.png}
+    \caption{Time Table Management Page - Class scheduling and timetable coordination}
+    \label{fig:sectionalhead-timetable}
+\end{figure}
+
+\section{Student Interfaces}
+
+The student role provides access to academic information, assessments, attendance, and personal management.
+
+\subsection{Student Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-dashboard-page.png}
+    \caption{Student Dashboard - Academic overview and quick access to student services}
+    \label{fig:student-dashboard}
+\end{figure}
+
+\subsection{Student Profile Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-profile-page.png}
+    \caption{Student Profile Page - Personal information and academic details}
+    \label{fig:student-profile}
+\end{figure}
+
+\subsection{Assessment and Examination Interfaces}
+
+\subsubsection{Assessment Page}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-assessment-page.png}
+    \caption{Student Assessment Page - Assignment and assessment management}
+    \label{fig:student-assessment}
+\end{figure}
+
+\subsubsection{Examinations Page}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-exams-page.png}
+    \caption{Student Examinations Page - Exam schedules and information}
+    \label{fig:student-exams}
+\end{figure}
+
+\subsubsection{Results Page}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-results-page.png}
+    \caption{Student Results Page - Academic results and grade reporting}
+    \label{fig:student-results}
+\end{figure}
+
+\subsection{Attendance Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-attendance-page.png}
+    \caption{Student Attendance Page - Attendance tracking and history}
+    \label{fig:student-attendance}
+\end{figure}
+
+\subsection{Communication and Activity}
+
+\subsubsection{Notifications}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-notifications.png}
+    \caption{Student Notifications - System announcements and alerts}
+    \label{fig:student-notifications}
+\end{figure}
+
+\subsubsection{Activity Log}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{student/student-activity-log.png}
+    \caption{Student Activity Log - Personal activity tracking and history}
+    \label{fig:student-activity}
+\end{figure}
+
+\subsubsection{Logout Process}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{student/student-logout.png}
+    \caption{Student Logout Confirmation - Secure session termination}
+    \label{fig:student-logout}
+\end{figure}
+
+\section{Teacher Interfaces}
+
+The teacher role encompasses classroom management, student assessment, grading, and academic reporting.
+
+\subsection{Teacher Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-dashboard-page.png}
+    \caption{Teacher Dashboard - Classroom overview and teaching tools}
+    \label{fig:teacher-dashboard}
+\end{figure}
+
+\subsection{Teacher Profile Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-profile-page.png}
+    \caption{Teacher Profile Page - Professional information and preferences}
+    \label{fig:teacher-profile}
+\end{figure}
+
+\subsection{Student Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-students-page.png}
+    \caption{Teacher Students Page - Class roster and student information management}
+    \label{fig:teacher-students}
+\end{figure}
+
+\subsection{Assessment and Grading}
+
+\subsubsection{Assessment Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-assesements-page.png}
+    \caption{Teacher Assessments Page - Assignment creation and management}
+    \label{fig:teacher-assessments}
+\end{figure}
+
+\subsubsection{Grading Interface}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-grades-page.png}
+    \caption{Teacher Grades Page - Student grade entry and management}
+    \label{fig:teacher-grades}
+\end{figure}
+
+\subsubsection{Examination Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-exams-page.png}
+    \caption{Teacher Exams Page - Examination setup and administration}
+    \label{fig:teacher-exams}
+\end{figure}
+
+\subsection{Attendance Management}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-attendance-page.png}
+    \caption{Teacher Attendance Page - Student attendance tracking and recording}
+    \label{fig:teacher-attendance}
+\end{figure}
+
+\subsection{Reporting and Analytics}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{teacher/teacher-reports-page.png}
+    \caption{Teacher Reports Page - Academic performance reports and analytics}
+    \label{fig:teacher-reports}
+\end{figure}
+
+\section{Summary}
+
+This comprehensive interface documentation showcases the complete user experience design for the School Management System. The interfaces are designed with role-based access control, ensuring that each user type has access to appropriate functionality while maintaining system security and usability.
+
+Key design principles evident throughout the interfaces include:
+\begin{itemize}
+    \item Consistent navigation and layout patterns
+    \item Role-appropriate functionality and information display
+    \item Clear visual hierarchy and user-friendly design
+    \item Comprehensive data management capabilities
+    \item Integrated communication and notification systems
+\end{itemize}
+
+The system supports five distinct user roles (Administrator, Principal, Sectional Head, Teacher, and Student), each with tailored interfaces that support their specific responsibilities and workflow requirements within the educational management context.
+
+\end{document}
