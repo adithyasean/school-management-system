@@ -1,0 +1,119 @@
+/* Attractive Report Layout Styles for Admin and Teacher */
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+    margin: 0;
+    padding: 0;
+}
+
+.report-container {
+    max-width: 900px;
+    margin: 48px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+}
+
+.report-container::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%);
+    opacity: 0.13;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #e3e8ee;
+    padding-bottom: 22px;
+    margin-bottom: 38px;
+    position: relative;
+    z-index: 1;
+}
+
+.header .title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #1a365d;
+    letter-spacing: 1px;
+}
+
+.header .role {
+    font-size: 1.1rem;
+    color: #2193b0;
+    font-weight: 600;
+    background: #e0f7fa;
+    padding: 6px 18px;
+    border-radius: 16px;
+}
+
+.report-section {
+    margin-bottom: 38px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2193b0;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 28px;
+    background: #f8fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(33,147,176,0.04);
+}
+
+.report-table th, .report-table td {
+    border-bottom: 1px solid #e3e8ee;
+    padding: 14px 12px;
+    text-align: left;
+}
+
+.report-table th {
+    background: linear-gradient(90deg, #6dd5ed 0%, #2193b0 100%);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+}
+
+.report-table tr:last-child td {
+    border-bottom: none;
+}
+
+.report-table tr:nth-child(even) td {
+    background: #eaf6fb;
+}
+
+@media (max-width: 700px) {
+    .report-container {
+        padding: 18px 4px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .header .title {
+        font-size: 1.4rem;
+    }
+}
