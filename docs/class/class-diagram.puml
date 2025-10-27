@@ -1,4 +1,4 @@
-@startuml School Management System - Class Diagram
+@startuml class-diagram
 title School Management System - Class Diagram
 
 ' Layout settings
@@ -231,9 +231,12 @@ Exam "1" o-- "✱" ExamResult : has
 
 ' Association with multiplicities (relationships)
 Student "✱" -- "✱" Exam : takes
+Student "1" -- "✱" ExamResult : receives
+Student "✱" -- "✱" Assessment : submits
 Teacher "✱" -- "✱" Subject : teaches
 Teacher "1" -- "✱" Exam : marks
-Teacher "1" -- "✱" Class : teaches
+Teacher "✱" -- "✱" Class : teaches
+Teacher "1" -- "✱" Session : conducts
 SectionalHead "1" -- "✱" Teacher : supervises
 Principal "1" -- "✱" SectionalHead : manages
 Principal "1" -- "✱" User : administers
